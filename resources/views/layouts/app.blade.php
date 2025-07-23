@@ -65,6 +65,7 @@
     <script src="{{ asset('js/jquery.sticky.js') }}"></script>
     <script src="{{ asset('js/own-menu.js') }}"></script>
     <script src="{{ asset('js/jquery.nouislider.min.js') }}"></script>
+    <script src="{{ asset('js/google-map-home.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
     <script type="text/javascript">
         /*-----------------------------------------------------------------------------------*/

@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 
 class FrontController extends Controller
 {
-    //
     public function index()
     {
         return view('index');
@@ -35,6 +34,15 @@ class FrontController extends Controller
     {
         return view('properties');
     }
+    public function propertyDetail($id)
+    {
+        return view('property_detail', ['id' => $id]);
+    }
+
+    public function ourTeam()
+    {
+        return view('our_team');
+    }
     public function blog()
     {
         return view('blog');
@@ -43,14 +51,14 @@ class FrontController extends Controller
     {
         return view('blog_detail', ['id' => $id]);
     }
-    public function propertyDetail($id)
-    {
-        return view('property_detail', ['id' => $id]);
-    }
     public function search(Request $request)
     {
         $query = $request->input('query');
-        // Perform search logic here, e.g., querying the database
         return view('search_results', ['query' => $query]);     
+    }
+
+    public function propertyList()
+    {
+        return view('property_listing');
     }
 }

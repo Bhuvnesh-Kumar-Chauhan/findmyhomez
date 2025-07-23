@@ -12,10 +12,12 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/contact', 'contact')->name('contact');
         Route::get('/services', 'services')->name('services');
         Route::get('/properties', 'properties')->name('properties');
+        Route::get('/property/{id}', 'propertyDetail')->name('property.detail');
+        ROute::get('our-team', 'ourTeam')->name('our.team'); 
         Route::get('/blog', 'blog')->name('blog');
         Route::get('/blog/{id}', 'blogDetail')->name('blog.detail');
-        Route::get('/property/{id}', 'propertyDetail')->name('property.detail');
         Route::get('/search', 'search')->name('search');    
+        Route::get('property-listing', 'propertyList')->name('property.listing');
     
     });
 });
