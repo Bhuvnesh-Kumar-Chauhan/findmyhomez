@@ -1,6 +1,6 @@
-@extends('layouts.master')
+@extends('admin.layouts.master')
 @section('title')
-    Products
+    Country
 @endsection
 @section('css')
     <!-- ION Slider -->

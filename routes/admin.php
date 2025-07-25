@@ -3,9 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\auth\Authcontroller;
 use App\Http\Controllers\Admin\AdminController;
-// use App\Http\Controllers\Admin\UserController;
-// use App\Http\Controllers\Admin\PropertyController;
-// use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\CountryController;
+use App\Http\Controllers\Admin\StateController;
+use App\Http\Controllers\Admin\CityController;
+
 
 Route::name('admin.')->group(function () {
 
@@ -17,49 +18,36 @@ Route::name('admin.')->group(function () {
     Route::middleware(['admin'])->group(function () {
         Route::controller(AdminController::class)->group(function () {
             Route::get('/dashboard', 'dashboard')->name('dashboard');
-            
+        });
+
+        Route::controller(CountryController::class)->prefix('countries')->name('countries.')->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/create', 'create')->name('create');
+            Route::post('/', 'store')->name('store');
+            Route::get('/{country}/edit', 'edit')->name('edit');
+            Route::put('/{country}', 'update')->name('update');
+            Route::delete('/{country}', 'destroy')->name('destroy');
+        });
+
+        Route::controller(StateController::class)->prefix('states')->name('states.')->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/create', 'create')->name('create');
+            Route::post('/', 'store')->name('store');
+            Route::get('/{state}/edit', 'edit')->name('edit');
+            Route::put('/{state}', 'update')->name('update');
+            Route::delete('/{state}', 'destroy')->name('destroy');
+        });
+        Route::controller(CityController::class)->prefix('cities')->name('cities.')->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/create', 'create')->name('create');
+            Route::post('/', 'store')->name('store');
+            Route::get('/{city}/edit', 'edit')->name('edit');
+            Route::put('/{city}', 'update')->name('update');
+            Route::delete('/{city}', 'destroy')->name('destroy');
+
+            Route::get('/states/{countryId}', 'getStates')->name('states');
+
         });
     });
 
-    // Route::prefix('users')
-    //     ->name('users.')
-    //     ->controller(UserController::class)
-    //     ->group(function () {
-    //         Route::get('/', 'index')->name('index');
-    //         Route::get('/create', 'create')->name('create');
-    //         Route::post('/', 'store')->name('store');
-    //         Route::get('/{user}/edit', 'edit')->name('edit');
-    //         Route::put('/{user}', 'update')->name('update');
-    //         Route::delete('/{user}', 'destroy')->name('destroy');
-    //     });
-
-    // Properties Management
-    // Route::prefix('properties')
-    //     ->name('properties.')
-    //     ->controller(PropertyController::class)
-    //     ->group(function () {
-    //         Route::get('/', 'index')->name('index');
-    //         Route::get('/create', 'create')->name('create');
-    //         Route::post('/', 'store')->name('store');
-    //         Route::get('/{property}/edit', 'edit')->name('edit');
-    //         Route::put('/{property}', 'update')->name('update');
-    //         Route::delete('/{property}', 'destroy')->name('destroy');
-    //     });
-
-    // Blog Management
-    // Route::prefix('blog')
-    //     ->name('blog.')
-    //     ->controller(BlogController::class)
-    //     ->group(function () {
-    //         Route::get('/', 'index')->name('index');
-    //         Route::get('/create', 'create')->name('create');
-    //         Route::post('/', 'store')->name('store');
-    //         Route::get('/{post}/edit', 'edit')->name('edit');
-    //         Route::put('/{post}', 'update')->name('update');
-    //         Route::delete('/{post}', 'destroy')->name('destroy');
-    //     });
-
-    // Settings (example)
-    // Route::get('/settings', [AdminController::class, 'settings'])
-    //     ->name('settings');
 });

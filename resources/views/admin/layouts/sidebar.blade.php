@@ -26,11 +26,26 @@
                 <li class="menu-title">Menu</li>
 
                 <li>
-                    <a href="index" class="waves-effect">
+                    <a href="{{ route('admin.dashboard') }}" class="waves-effect">
                         <i class="dripicons-home"></i><span class="badge rounded-pill bg-info float-end">3</span>
                         <span>Dashboard</span>
                     </a>
                 </li>
+
+
+                {{-- settings --}}
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="mdi mdi-cog-outline font-size-20"></i>
+                        <span>Setting</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ route('admin.countries.index') }}">Country</a></li>
+                        <li><a href="{{ route('admin.states.index') }}">State</a></li>
+                        <li><a href="{{ route('admin.cities.index') }}">City</a></li>
+                    </ul>
+                </li>
+
 
                 <li>
                     <a href="calendar" class=" waves-effect">
