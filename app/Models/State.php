@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Models\Country;
 use App\Models\City;
 
+use App\Models\Property;
+
 class State extends Model
 {
     protected $fillable = [
@@ -28,6 +30,10 @@ class State extends Model
     public function cities(): HasMany
     {
         return $this->hasMany(City::class);
+    }
+    public function properties(): HasMany
+    {
+        return $this->hasMany(Property::class);
     }
     
 }

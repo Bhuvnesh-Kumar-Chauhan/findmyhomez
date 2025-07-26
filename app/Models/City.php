@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Models\Country;
 use App\Models\State;
+use App\Models\Property;
 
 class City extends Model
 {
@@ -32,6 +33,10 @@ class City extends Model
     public function state(): BelongsTo
     {
         return $this->belongsTo(State::class);
+    }
+    public function properties(): HasMany
+    {
+        return $this->hasMany(Property::class);
     }
 
 }

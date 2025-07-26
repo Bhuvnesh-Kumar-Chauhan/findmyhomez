@@ -19,6 +19,16 @@
 
 
 
+        <style>
+            .sub-menu {
+                display: none;
+            }
+
+            .sub-menu.show {
+                display: block;
+            }
+        </style>
+
         <!--- Sidemenu -->
         <div id="sidebar-menu">
             <!-- Left Menu Start -->
@@ -33,6 +43,71 @@
                 </li>
 
 
+                {{-- Sliders --}}
+                <li>
+                    <a href="{{ route('admin.sliders.index') }}" class="waves-effect">
+                        <i class="fas fa-sliders-h"></i>
+                        <span>Home Sliders</span>
+                    </a>
+                </li>
+
+                {{-- Property --}}
+
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="fas fa-home"></i>
+                        <span>Property</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ route('admin.property_types.index') }}">Property Type</a></li>
+                        <li><a href="{{ route('admin.property_statuses.index') }}">Property Status</a></li>
+                        <li><a href="{{ route('admin.properties.index') }}">Properties</a></li>
+                    </ul>
+                </li>
+
+                {{-- Service --}}
+                <li>
+                    <a href="{{ route('admin.services.index') }}" class="waves-effect">
+                        <i class="fas fa-concierge-bell"></i>
+                        <span>Service</span>
+                    </a>
+                </li>
+
+                {{-- Team Member (Agent) --}}
+                <li>
+                    <a href="{{ route('admin.team-members.index') }}" class="waves-effect">
+                        <i class="fas fa-users"></i>
+                        <span>Team Member</span>
+                    </a>
+                </li>
+
+                {{-- Testimonials --}}
+                <li>
+                    <a href="{{ route('admin.testimonials.index') }}" class="waves-effect">
+                        <i class="fas fa-quote-left"></i>
+                        <span>Testimonials</span>
+                    </a>
+                </li>
+                {{-- Subscriber --}}
+                <li>
+                    <a href="{{ route('admin.subscribers.index') }}" class="waves-effect">
+                        <i class="fas fa-users"></i>
+                        <span>Subscribers</span>
+                    </a>
+                </li>
+
+                {{-- Blog --}}
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="fas fa-tags"></i>
+                        <span>Blog</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ route('admin.blog-categories.index') }}">Blog Category</a></li>
+                        <li><a href="{{ route('admin.blogs.index') }}">Blog</a></li>
+                    </ul>
+                </li>
+
                 {{-- settings --}}
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -43,6 +118,7 @@
                         <li><a href="{{ route('admin.countries.index') }}">Country</a></li>
                         <li><a href="{{ route('admin.states.index') }}">State</a></li>
                         <li><a href="{{ route('admin.cities.index') }}">City</a></li>
+                        <li><a href="{{ route('admin.settings.index') }}">General Settings</a></li>
                     </ul>
                 </li>
 
@@ -104,6 +180,26 @@
             </ul>
         </div>
         <!-- Sidebar -->
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="{{ asset('js/custom.js') }}"></script>
+
+
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const dropdownToggles = document.querySelectorAll('.has-arrow');
+
+                dropdownToggles.forEach(toggle => {
+                    toggle.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const subMenu = this.nextElementSibling;
+                        subMenu.classList.toggle('show');
+                    });
+                });
+            });
+        </script>
     </div>
 </div>
 <!-- Left Sidebar End -->

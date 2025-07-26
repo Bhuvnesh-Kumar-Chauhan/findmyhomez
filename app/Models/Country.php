@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Models\State;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Models\City;
+use App\Models\Property;
 
 class Country extends Model
 {
@@ -30,5 +30,9 @@ class Country extends Model
     public function cities(): HasMany
     {
         return $this->hasMany(City::class);
+    }
+    public function properties(): HasMany
+    {
+        return $this->hasMany(Property::class);
     }
 }

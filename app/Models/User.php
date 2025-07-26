@@ -6,6 +6,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\Blog;
+use App\Models\Property;
 
 class User extends Authenticatable
 {
@@ -45,5 +48,20 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function blogs(): HasMany
+    {
+        return $this->hasMany(Blog::class, 'author_id');
+    }
+    public function isAdmin(): bool
+    {
+        return $this->is_admin;
+    }
+    
+    
+    public function properties(): HasMany
+    {
+        return $this->hasMany(Property::class, 'user_id');
     }
 }
