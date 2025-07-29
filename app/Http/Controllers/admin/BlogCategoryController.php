@@ -21,10 +21,7 @@ class BlogCategoryController extends Controller
 
     public function store(Request $request)
     {
-        $request->merge([
-            'is_featured' => $request->has('is_featured'),
-            'status' => $request->has('status')
-        ]);
+        
 
         $validated = $request->validate([
             'name' => 'required|string|max:255|unique:blog_categories',
@@ -49,10 +46,7 @@ class BlogCategoryController extends Controller
 
     public function update(Request $request, BlogCategory $blogCategory)
     {
-        $request->merge([
-            'is_featured' => $request->has('is_featured'),
-            'status' => $request->has('status')
-        ]);
+        
 
         $validated = $request->validate([
             'name' => 'required|string|max:255|unique:blog_categories,name,'.$blogCategory->id,

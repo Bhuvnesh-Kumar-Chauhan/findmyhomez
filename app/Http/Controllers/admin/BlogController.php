@@ -26,10 +26,7 @@ class BlogController extends Controller
 
     public function store(Request $request)
     {
-        $request->merge([
-            'status' => $request->has('status'),
-            'published_at' => $request->has('status') ? now() : null
-        ]);
+
 
         $validated = $request->validate([
             'title' => 'required|string|max:255|unique:blogs',
@@ -40,6 +37,7 @@ class BlogController extends Controller
             'status' => 'required|boolean',
             'meta_title' => 'nullable|string|max:255',
             'meta_description' => 'nullable|string|max:500',
+            'published_at' => now()
         ]);
 
         if ($request->hasFile('featured_image')) {
@@ -61,11 +59,7 @@ class BlogController extends Controller
 
     public function update(Request $request, Blog $blog)
     {
-        $request->merge([
-            'status' => $request->has('status'),
-            'published_at' => $blog->published_at ?? ($request->has('status') ? now() : null)
-        ]);
-
+     
         $validated = $request->validate([
             'title' => 'required|string|max:255|unique:blogs,title,'.$blog->id,
             'content' => 'required|string',

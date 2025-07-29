@@ -112,7 +112,7 @@
                 <input type="hidden" name="status" value="0">
                 <input type="checkbox" class="form-check-input" 
                        id="status" name="status" value="1"
-                       {{ (old('status', $blog->status ?? false)) ? 'checked' : '' }}>
+                       {{ (old('status', $blog->status ?? 0)) ? 'checked' : '' }}>
                 <label class="form-check-label" for="status">Publish this post</label>
             </div>
         </div>

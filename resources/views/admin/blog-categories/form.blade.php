@@ -67,7 +67,7 @@
                 <input type="hidden" name="is_featured" value="0">
                 <input type="checkbox" class="form-check-input" 
                        id="is_featured" name="is_featured" value="1"
-                       {{ (old('is_featured', $blogCategory->is_featured ?? false)) ? 'checked' : '' }}>
+                       {{ (old('is_featured', $blogCategory->is_featured ?? 0)) ? 'checked' : '' }}>
                 <label class="form-check-label" for="is_featured">Mark as featured</label>
             </div>
         </div>
@@ -77,7 +77,7 @@
                 <input type="hidden" name="status" value="0">
                 <input type="checkbox" class="form-check-input" 
                        id="status" name="status" value="1"
-                       {{ (old('status', $blogCategory->status ?? true)) ? 'checked' : '' }}>
+                       {{ (old('status', $blogCategory->status ?? 0)) ? 'checked' : '' }}>
                 <label class="form-check-label" for="status">Active</label>
             </div>
         </div>
