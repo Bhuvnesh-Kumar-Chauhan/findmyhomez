@@ -11,23 +11,13 @@
                     <span class="avatar-online bg-success"></span>
                 </div>
                 <div class="user-info">
-                    <h5 class="mt-3 font-size-16 text-white">James Raphael</h5>
+                    <h5 class="mt-3 font-size-16 text-white">Bhuvnesh</h5>
                     <span class="font-size-13 text-white-50">Administrator</span>
                 </div>
             </div>
         </div>
 
 
-
-        <style>
-            .sub-menu {
-                display: none;
-            }
-
-            .sub-menu.show {
-                display: block;
-            }
-        </style>
 
         <!--- Sidemenu -->
         <div id="sidebar-menu">
@@ -122,84 +112,9 @@
                     </ul>
                 </li>
 
-
-                <li>
-                    <a href="calendar" class=" waves-effect">
-                        <i class="dripicons-calendar"></i>
-                        <span>Calendar</span>
-                    </a>
-                </li>
-
-
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="dripicons-cart"></i>
-                        <span>Ecommerce</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="ecommerce-products">Products</a></li>
-                        <li><a href="ecommerce-product-detail">Product Detail</a></li>
-                        <li><a href="ecommerce-orders">Orders</a></li>
-                        <li><a href="ecommerce-customers">Customers</a></li>
-                        <li><a href="ecommerce-cart">Cart</a></li>
-                        <li><a href="ecommerce-checkout">Checkout</a></li>
-                        <li><a href="ecommerce-shops">Shops</a></li>
-                        <li><a href="ecommerce-add-product">Add Product</a></li>
-                    </ul>
-                </li>
-
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="dripicons-mail"></i>
-                        <span>Email</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="email-inbox">Inbox</a></li>
-                        <li><a href="email-read">Email Read</a></li>
-                        <li><a href="email-compose">Email Compose</a></li>
-                    </ul>
-                </li>
-
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="dripicons-copy"></i>
-                        <span>Pages</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="pages-timeline">Timeline</a></li>
-                        <li><a href="pages-invoice">Invoice</a></li>
-                        <li><a href="pages-blank">Blank Page</a></li>
-                        <li><a href="pages-404">Error 404</a></li>
-                        <li><a href="pages-500">Error 500</a></li>
-                        <li><a href="pages-pricing">Pricing</a></li>
-                        <li><a href="pages-maintenance">Maintenance</a></li>
-                        <li><a href="pages-comingsoon">Coming Soon</a></li>
-                        <li><a href="pages-faq">FAQs</a></li>
-                    </ul>
-                </li>
             </ul>
         </div>
         <!-- Sidebar -->
-
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="{{ asset('js/custom.js') }}"></script>
-
-
-
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const dropdownToggles = document.querySelectorAll('.has-arrow');
-
-                dropdownToggles.forEach(toggle => {
-                    toggle.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        const subMenu = this.nextElementSibling;
-                        subMenu.classList.toggle('show');
-                    });
-                });
-            });
-        </script>
     </div>
 </div>
 <!-- Left Sidebar End -->

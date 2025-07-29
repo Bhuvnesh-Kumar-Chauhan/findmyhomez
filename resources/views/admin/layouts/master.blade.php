@@ -1,14 +1,22 @@
+<?php
+
+$settings = \App\Models\Setting::first();
+$site_title = $settings->site_name ?? 'FindMyHomeZ - Admin & Dashboard ';
+$favicon = $settings->favicon ? asset('storage/' . $settings->favicon) : asset('build/images/favicon.ico');
+
+?>
+
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8" />
-    <title> @yield('title') | FindMyHomeZ - Admin & Dashboard Template</title>
+    <title> @yield('title') | {{ $site_title }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesdesign" name="author" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ URL::asset('build/images/favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ $favicon }}">
     
     <!-- include head css -->
     @include('admin.layouts.head-css')

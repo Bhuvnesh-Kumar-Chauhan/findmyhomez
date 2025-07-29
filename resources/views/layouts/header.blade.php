@@ -1,9 +1,16 @@
 <!--======= HEADER =========-->
+
+<?php
+$settings = \App\Models\Setting::first();
+$logo = $settings->logo ? asset('storage/' . $settings->logo) : asset('build/images/logo-dark.png');
+?>
 <header class="sticky">
     <div class="container">
 
         <!--======= LOGO =========-->
-        <div class="logo"> <a href="#."><img src="images/logo.png" alt=""></a> </div>
+        <div class="logo"> 
+            <a href="{{ route('home') }}"><img src="{{ $logo }}" alt="" height="42" width="75"></a>
+         </div>
         <!--======= NAV =========-->
         <nav>
 

@@ -1,14 +1,23 @@
+<?php
+$settings = \App\Models\Setting::first();
+$site_title = $settings ? $settings->site_name : 'FindMyHomeZ | Real Estate';
+$site_description = $settings ? $settings->site_description : 'FindMyHomeZ | Real Estate';
+$site_keywords = $settings ? $settings->site_keywords : 'HTML5,CSS3,HTML,Template,Multi-Purpose,Mr_Bhuvi,Corporate FindMyHomeZ | Real Estate';
+$site_author = $settings ? $settings->site_author : 'Mr_Bhuvi';  
+$favicon = $settings->favicon ? asset('storage/' . $settings->favicon) : asset('build/images/favicon.ico');
+$logo = $settings->logo ? asset('storage/' . $settings->logo) : asset('build/images/logo-dark.png');
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Realtor | Real Estate </title>
+    <title>{{ $site_title }} | Real Estate </title>
     <meta name="keywords"
-        content="HTML5,CSS3,HTML,Template,Multi-Purpose,M_Adnan,Corporate Theme,Realtor | Real Estate">
-    <meta name="description" content="Realtor | Real Estate ">
-    <meta name="author" content="M_Adnan">
+        content="{{ $site_keywords }}">
+    <meta name="description" content="{{ $site_description }}">
+    <meta name="author" content="{{ $site_author }}">
 
     <!-- FONTS ONLINE -->
     <link
@@ -16,6 +25,8 @@
         rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+
+    <link rel="shortcut icon" href="{{ $favicon }}">
 
     <!--MAIN STYLE-->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">

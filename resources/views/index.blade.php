@@ -5,17 +5,18 @@
         <div class="flex-banner">
             <ul class="slides">
                 <!--======= SLIDER =========-->
-                <li> <img src="images/slider-img-1.jpg" alt=""> </li>
+                {{-- <li> <img src="images/slider-img-1.jpg" alt=""> </li> --}}
+                @foreach($home_sliders as $slider)
+                    <li> <img src="{{ asset('storage/' . $slider->image) }}" alt=""> </li>
+                @endforeach
 
-                <!--======= SLIDER =========-->
-                <li> <img src="images/slider-img-2.jpg" alt=""> </li>
             </ul>
         </div>
 
         <!--======= FIND PROPERTY =========-->
         <div class="finder">
             <div class="container">
-                <h1>Welcome to realtor</h1>
+                <h1>Welcome to {{ $settings->site_name ?? 'FindMyHomeZ' }}</h1>
 
                 <!--======= FORM SECTION =========-->
                 <div class="find-sec">

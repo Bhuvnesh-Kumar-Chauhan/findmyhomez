@@ -1,24 +1,29 @@
+<?php
+
+$settings = \App\Models\Setting::first();
+$logo = $settings->logo ? asset('storage/' . $settings->logo) : asset('build/images/logo-sm.png');
+?>
 <header id="page-topbar">
     <div class="navbar-header">
         <div class="d-flex">
 
             <!-- LOGO -->
             <div class="navbar-brand-box">
-                <a href="index" class="logo logo-dark">
+                <a href="{{ route('home') }}" target="_blank" class="logo logo-dark">
                     <span class="logo-sm">
-                        <img src="{{ URL::asset('build/images/logo-sm.png') }}" alt="" height="22">
+                        <img src="{{ $logo }}" alt="" height="55" width="50%">
                     </span>
                     <span class="logo-lg">
-                        <img src="{{ URL::asset('build/images/logo-dark.png') }}" alt="" height="20">
+                        <img src="{{ $logo }}" alt="" height="55" width="50%">
                     </span>
                 </a>
 
-                <a href="index" class="logo logo-light">
+                <a href="{{ route('home') }}" target="_blank" class="logo logo-light">
                     <span class="logo-sm">
-                        <img src="{{ URL::asset('build/images/logo-sm.png') }}" alt="" height="22">
+                        <img src="{{ $logo }}" alt="" height="55" width="50%">
                     </span>
                     <span class="logo-lg">
-                        <img src="{{ URL::asset('build/images/logo-light.png') }}" alt="" height="20">
+                        <img src="{{ $logo }}" alt="" height="55" width="50%">
                     </span>
                 </a>
             </div>
@@ -27,23 +32,6 @@
                 <i class="mdi mdi-menu"></i>
             </button>
 
-
-            <div class="topbar-social-icon me-3 d-none d-md-block">
-                <ul class="list-inline title-tooltip m-0">
-                    <li class="list-inline-item">
-                        <a href="email-inbox" data-bs-toggle="tooltip" data-placement="top" title="Email">
-                            <i class="mdi mdi-email-outline"></i>
-                        </a>
-                    </li>
-
-                    <li class="list-inline-item">
-                        <a href="calendar" data-bs-toggle="tooltip" data-placement="top" title="Calendar">
-                            <i class="mdi mdi-calendar"></i>
-                        </a>
-                    </li>
-
-                </ul>
-            </div>
 
         </div>
 
@@ -120,7 +108,7 @@
                                 <img src="{{ URL::asset('build/images/users/avatar-3.jpg') }}"
                                     class="me-3 rounded-circle avatar-xs" alt="user-pic">
                                 <div class="media-body">
-                                    <h6 class="mt-0 mb-1">James Lemire</h6>
+                                    <h6 class="mt-0 mb-1">Bhuvnesh</h6>
                                     <div class="font-size-13 text-muted">
                                         <p class="mb-1">It will seem like simplified English.</p>
                                         <p class="mb-0"><i class="mdi mdi-clock-outline"></i> 1 hours ago</p>
@@ -172,7 +160,7 @@
                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img class="rounded-circle header-profile-user"
                         src="{{ URL::asset('build/images/users/avatar-7.jpg') }}" alt="Header Avatar">
-                    <span class="d-none d-xl-inline-block ms-1">James</span>
+                    <span class="d-none d-xl-inline-block ms-1">FindMyHomeZ</span>
                     <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-end">
@@ -181,11 +169,9 @@
                             class="mdi mdi-account-circle-outline font-size-16 align-middle me-1"></i> Profile</a>
                     <a class="dropdown-item" href="#"><i
                             class="mdi mdi-wallet-outline font-size-16 align-middle me-1"></i> My Wallet</a>
-                    <a class="dropdown-item d-block" href="#"><span
+                    <a class="dropdown-item d-block" href="{{ route('admin.settings.index') }}"><span
                             class="badge badge-success float-end">11</span><i
                             class="mdi mdi-cog-outline font-size-16 align-middle me-1"></i> Settings</a>
-                    <a class="dropdown-item" href="#"><i
-                            class="mdi mdi-lock-open-outline font-size-16 align-middle me-1"></i> Lock screen</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item text-danger" href="{{ route('admin.logout') }}"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

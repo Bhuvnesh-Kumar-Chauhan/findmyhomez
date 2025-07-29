@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Slider;
 
 class FrontController extends Controller
 {
     public function index()
     {
-        return view('index');
+        $home_sliders = Slider::all();
+        $settings = \App\Models\Setting::first();
+        return view('index',compact('home_sliders','settings'));
     }
     public function second()
     {

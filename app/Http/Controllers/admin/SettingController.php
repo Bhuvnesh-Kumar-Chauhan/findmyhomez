@@ -49,17 +49,17 @@ class SettingController extends Controller
 
         // Handle file uploads
         if ($request->hasFile('logo')) {
-            $validated['logo'] = $request->file('logo')->store('settings');
+            $validated['logo'] = $request->file('logo')->store('settings', 'public');
         }
 
         if ($request->hasFile('favicon')) {
-            $validated['favicon'] = $request->file('favicon')->store('settings');
+            $validated['favicon'] = $request->file('favicon')->store('settings', 'public');
         }
 
         Setting::create($validated);
 
         return redirect()->route('admin.settings.index')
-                        ->with('success', 'Setting created successfully');
+            ->with('success', 'Setting created successfully');
     }
 
     /**
@@ -97,7 +97,7 @@ class SettingController extends Controller
             if ($setting->logo) {
                 Storage::delete($setting->logo);
             }
-            $validated['logo'] = $request->file('logo')->store('settings');
+            $validated['logo'] = $request->file('logo')->store('settings', 'public');
         } elseif ($request->has('remove_logo')) {
             if ($setting->logo) {
                 Storage::delete($setting->logo);
@@ -111,7 +111,7 @@ class SettingController extends Controller
             if ($setting->favicon) {
                 Storage::delete($setting->favicon);
             }
-            $validated['favicon'] = $request->file('favicon')->store('settings');
+            $validated['favicon'] = $request->file('favicon')->store('settings', 'public');
         } elseif ($request->has('remove_favicon')) {
             if ($setting->favicon) {
                 Storage::delete($setting->favicon);
@@ -122,7 +122,7 @@ class SettingController extends Controller
         $setting->update($validated);
 
         return redirect()->route('admin.settings.index')
-                        ->with('success', 'Setting updated successfully');
+            ->with('success', 'Setting updated successfully');
     }
 
     /**
@@ -132,15 +132,16 @@ class SettingController extends Controller
     {
         // Delete associated files
         if ($setting->logo) {
-            Storage::delete($setting->logo);
+            Storage::disk('public')->delete($setting->logo);
         }
+
         if ($setting->favicon) {
-            Storage::delete($setting->favicon);
+            Storage::disk('public')->delete($setting->favicon);
         }
 
         $setting->delete();
 
         return redirect()->route('admin.settings.index')
-                        ->with('success', 'Setting deleted successfully');
+            ->with('success', 'Setting deleted successfully');
     }
 }

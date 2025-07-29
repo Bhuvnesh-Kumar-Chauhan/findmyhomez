@@ -136,7 +136,7 @@ Route::name('admin.')->group(function () {
             Route::get('/{slider}/edit', 'edit')->name('edit');
             Route::put('/{slider}', 'update')->name('update');
             Route::delete('/{slider}', 'destroy')->name('destroy');
-            Route::post('/{slider?}/status', 'updateStatus')->name('status.update');
+             Route::post('{slider}/status', 'updateStatus')->name('status.update');
         });
         Route::controller(PropertyController::class)->prefix('properties')->name('properties.')->group(function () {
             Route::get('/', 'index')->name('index');

@@ -3,6 +3,10 @@
     Login page
 @endsection
 @section('content')
+    <?php
+    $settings = \App\Models\Setting::first();
+    $logo = $settings->logo ? asset('storage/' . $settings->logo) : asset('build/images/logo-dark.png');
+    ?>
     <div class="home-center">
         <div class="home-desc-center">
 
@@ -20,8 +24,7 @@
 
                                     <div class="text-center">
                                         <a href="index">
-                                            <img src="{{ URL::asset('build/images/logo-dark.png') }}" height="22"
-                                                alt="logo">
+                                            <img src="{{ $logo }}" height="100%" width="100%" alt="logo">
                                         </a>
 
                                         <h5 class="text-primary mb-2 mt-4">Welcome Back !</h5>
@@ -83,7 +86,8 @@
                             <p>©
                                 <script>
                                     document.write(new Date().getFullYear())
-                                </script> FindMyHomeZ. Crafted with <i class="mdi mdi-heart text-danger"></i> by
+                                </script> FindMyHomeZ. Crafted with <i class="mdi mdi-heart text-danger"></i>
+                                by
                                 Bhuvnesh Developer
                             </p>
                         </div>
