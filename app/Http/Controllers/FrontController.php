@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Service;
 use Illuminate\Http\Request;
 use App\Models\Slider;
 
@@ -10,8 +11,9 @@ class FrontController extends Controller
     public function index()
     {
         $home_sliders = Slider::all();
+        $services = Service::where('status', 1)->get();
         $settings = \App\Models\Setting::first();
-        return view('index',compact('home_sliders','settings'));
+        return view('index',compact('home_sliders','settings','services'));
     }
     public function second()
     {

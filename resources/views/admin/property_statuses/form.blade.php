@@ -39,13 +39,15 @@
         </div>
         <div class="col-md-6">
             <label class="form-label">Status</label>
+            <div class="col-md-6">
+            <label class="form-label">Status</label>
             <div class="form-check form-switch">
                 <input type="hidden" name="status" value="0">
-                <input type="checkbox" class="form-check-input" 
-                       id="status" name="status" value="1"
-                       {{ (old('status', $propertyStatus->status ?? true)) ? 'checked' : '' }}>
+                <input type="checkbox" class="form-check-input" id="status" name="status" value="1"
+                    {{ old('status', $propertyStatus->status ?? 0) ? 'checked' : '' }}>
                 <label class="form-check-label" for="status">Active</label>
             </div>
+        </div>
         </div>
     </div>
 

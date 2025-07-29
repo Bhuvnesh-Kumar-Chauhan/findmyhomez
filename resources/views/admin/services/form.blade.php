@@ -67,7 +67,7 @@
                         <input type="hidden" name="featured" value="0">
                         <input type="checkbox" class="form-check-input" 
                                id="featured" name="featured" value="1"
-                               {{ (old('featured', $service->featured ?? false)) ? 'checked' : '' }}>
+                               {{ (old('featured', $service->featured ?? 0)) ? 'checked' : '' }}>
                         <label class="form-check-label" for="featured">Mark as featured</label>
                     </div>
                 </div>
@@ -77,7 +77,7 @@
                         <input type="hidden" name="status" value="0">
                         <input type="checkbox" class="form-check-input" 
                                id="status" name="status" value="1"
-                               {{ (old('status', $service->status ?? true)) ? 'checked' : '' }}>
+                               {{ (old('status', $service->status ?? 0)) ? 'checked' : '' }}>
                         <label class="form-check-label" for="status">Active</label>
                     </div>
                 </div>

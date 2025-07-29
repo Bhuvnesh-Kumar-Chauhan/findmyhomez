@@ -6,7 +6,7 @@
             <ul class="slides">
                 <!--======= SLIDER =========-->
                 {{-- <li> <img src="images/slider-img-1.jpg" alt=""> </li> --}}
-                @foreach($home_sliders as $slider)
+                @foreach ($home_sliders as $slider)
                     <li> <img src="{{ asset('storage/' . $slider->image) }}" alt=""> </li>
                 @endforeach
 
@@ -194,84 +194,34 @@
         <div class="container">
 
             <!--======= TITTLE =========-->
-            <div class="tittle"> <img src="images/head-top.png" alt="">
+            <div class="tittle"> <img src="{{ asset('images/head-top.png') }}" alt="">
                 <h3>services we provide</h3>
-                <p>This time there's no stopping us. Straightnin' the curves. Flatnin' the hills Someday the mountain might
-                    get ‘em but the law never will. The weather started getting rough - the tiny ship was tossed.</p>
+                <p>Engage buyers with immersive virtual tour scripts that highlight property layouts, finishes, and unique
+                    selling points, enhancing online viewing experiences.</p>
             </div>
             <ul class="row">
 
                 <!--======= SERVICE SECTION =========-->
-                <li class="col-sm-3">
-                    <section>
-                        <!--======= SERVICE IMG =========-->
-                        <img class="img-responsive" src="images/service-img-1.jpg" alt="">
-                        <div class="icon"> <img src="images/icon-services-1.png" alt=""> </div>
+                @foreach ($services as $service)
+                    <li class="col-sm-3">
+                        <section>
+                            <!--======= SERVICE IMG =========-->
+                            <img class="img-responsive" src="{{ asset('storage/' . $service->image) }}" alt=""
+                                style="width: 100%; height: 250px; object-fit: cover; border-radius: 4px;">
+                            <div class="icon"> <img src="images/icon-services-1.png" alt=""> </div>
 
-                        <!--======= SERVICE HOVER =========-->
-                        <div class="ser-hover">
-                            <p>And when the odds are against him and their dangers work to do. You bet your life Speed Racer
-                                <a href="#." class="read-more">Read more <i
-                                        class="fa fa-angle-double-right"></i></a>
-                            </p>
-                        </div>
-                        <a href="#." class="heading">Residential</a>
-                    </section>
-                </li>
+                            <!--======= SERVICE HOVER =========-->
+                            <div class="ser-hover">
+                                <p>{{ Str::limit($service->description, 100) }}
+                                    <a href="#." class="read-more">Read more <i
+                                            class="fa fa-angle-double-right"></i></a>
+                                </p>
+                            </div>
+                            <a href="#." class="heading">{{ $service->title ?? 'NA' }}</a>
+                        </section>
+                    </li>
+                @endforeach
 
-                <!--======= SERVICE SECTION =========-->
-                <li class="col-sm-3">
-                    <section>
-                        <!--======= SERVICE IMG =========-->
-                        <img class="img-responsive" src="images/service-img-2.jpg" alt="">
-                        <div class="icon"> <img src="images/icon-services-2.png" alt=""> </div>
-
-                        <!--======= SERVICE HOVER =========-->
-                        <div class="ser-hover">
-                            <p>And when the odds are against him and their dangers work to do. You bet your life Speed Racer
-                                <a href="#." class="read-more">Read more <i
-                                        class="fa fa-angle-double-right"></i></a>
-                            </p>
-                        </div>
-                        <a href="#." class="heading">industrial</a>
-                    </section>
-                </li>
-
-                <!--======= SERVICE SECTION =========-->
-                <li class="col-sm-3">
-                    <section>
-                        <!--======= SERVICE IMG =========-->
-                        <img class="img-responsive" src="images/service-img-3.jpg" alt="">
-                        <div class="icon"> <img src="images/icon-services-3.png" alt=""> </div>
-
-                        <!--======= SERVICE HOVER =========-->
-                        <div class="ser-hover">
-                            <p>And when the odds are against him and their dangers work to do. You bet your life Speed Racer
-                                <a href="#." class="read-more">Read more <i
-                                        class="fa fa-angle-double-right"></i></a>
-                            </p>
-                        </div>
-                        <a href="#." class="heading">Asset management</a>
-                    </section>
-                </li>
-
-                <!--======= SERVICE SECTION =========-->
-                <li class="col-sm-3">
-                    <section>
-                        <!--======= SERVICE IMG =========-->
-                        <img class="img-responsive" src="images/service-img-4.jpg" alt="">
-                        <div class="icon"> <img src="images/icon-services-4.png" alt=""> </div>
-
-                        <!--======= SERVICE HOVER =========-->
-                        <div class="ser-hover">
-                            <p>And when the odds are against him and their dangers work to do. You bet your life Speed Racer
-                                <a href="#." class="read-more">Read more <i
-                                        class="fa fa-angle-double-right"></i></a>
-                            </p>
-                        </div>
-                        <a href="#." class="heading">financial support</a>
-                    </section>
-                </li>
             </ul>
         </div>
     </section>

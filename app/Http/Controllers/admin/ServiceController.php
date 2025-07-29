@@ -22,10 +22,7 @@ class ServiceController extends Controller
 
     public function store(Request $request)
     {
-        $request->merge([
-            'featured' => $request->has('featured'),
-            'status' => $request->has('status')
-        ]);
+       
 
         $validated = $request->validate([
             'title' => 'required|string|max:255|unique:services',
@@ -54,10 +51,7 @@ class ServiceController extends Controller
 
     public function update(Request $request, Service $service)
     {
-        $request->merge([
-            'featured' => $request->has('featured'),
-            'status' => $request->has('status')
-        ]);
+       
 
         $validated = $request->validate([
             'title' => 'required|string|max:255|unique:services,title,'.$service->id,

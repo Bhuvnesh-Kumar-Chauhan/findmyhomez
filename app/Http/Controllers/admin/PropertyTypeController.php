@@ -20,9 +20,6 @@ class PropertyTypeController extends Controller
 
     public function store(Request $request)
     {
-        $request->merge([
-            'status' => $request->has('status')
-        ]);
 
         $validated = $request->validate([
             'name' => 'required|string|max:255|unique:property_types',
@@ -48,9 +45,6 @@ class PropertyTypeController extends Controller
 
     public function update(Request $request, PropertyType $propertyType)
     {
-        $request->merge([
-            'status' => $request->has('status')
-        ]);
 
         $validated = $request->validate([
             'name' => 'required|string|max:255|unique:property_types,name,' . $propertyType->id,

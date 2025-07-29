@@ -27,7 +27,7 @@
 
                 <li>
                     <a href="{{ route('admin.dashboard') }}" class="waves-effect">
-                        <i class="dripicons-home"></i><span class="badge rounded-pill bg-info float-end">3</span>
+                        <i class="dripicons-home"></i>
                         <span>Dashboard</span>
                     </a>
                 </li>

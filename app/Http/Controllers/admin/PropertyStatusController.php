@@ -20,9 +20,7 @@ class PropertyStatusController extends Controller
 
     public function store(Request $request)
     {
-        $request->merge([
-            'status' => $request->has('status')
-        ]);
+       
 
         $request->validate([
             'name' => 'required|string|max:255|unique:property_statuses',
@@ -44,10 +42,7 @@ class PropertyStatusController extends Controller
 
     public function update(Request $request, PropertyStatus $propertyStatus)
     {
-        $request->merge([
-            'status' => $request->has('status')
-        ]);
-
+       
         $request->validate([
             'name' => 'required|string|max:255|unique:property_statuses,name,'.$propertyStatus->id,
             'color' => 'required|string|max:20',
