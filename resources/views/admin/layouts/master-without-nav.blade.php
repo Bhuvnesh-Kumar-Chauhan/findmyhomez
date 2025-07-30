@@ -1,7 +1,7 @@
 <?php
 $settings = \App\Models\Setting::first();
-$site_title = $settings->site_name ?? 'FindMyHomeZ - Admin Panel';      
-$favicon = $settings->favicon ? asset('storage/' . $settings->favicon) : asset('build/images/favicon.ico');
+$site_title = $settings->site_name ?? 'FindMyHomeZ - Admin Panel';
+$favicon = isset($settings->favicon) ? asset('storage/' . $settings->favicon) : asset('build/images/favicon.ico');
 ?>
 <!doctype html>
 <html lang="en">

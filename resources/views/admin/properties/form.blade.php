@@ -1,12 +1,11 @@
 @php
     // Determine if we're editing or creating
-    $isEdit = isset($property);
-    $action = $isEdit ? route('admin.properties.update', $property->id) : route('admin.properties.store');
-    $method = $isEdit ? 'PUT' : 'POST';
+$isEdit = isset($property);
+$action = $isEdit ? route('admin.properties.update', $property->id) : route('admin.properties.store');
+$method = $isEdit ? 'PUT' : 'POST';
 
-    // Get states and cities if editing
-    $states = $isEdit ? \App\Models\State::where('country_id', $property->country_id)->get() : collect();
-    $cities = $isEdit ? \App\Models\City::where('state_id', $property->state_id)->get() : collect();
+$states = $isEdit ? \App\Models\State::where('country_id', $property->country_id)->get() : collect();
+$cities = $isEdit ? \App\Models\City::where('state_id', $property->state_id)->get() : collect();
 @endphp
 
 <form method="POST" action="{{ $action }}" enctype="multipart/form-data">
@@ -34,7 +33,7 @@
                     <div class="mb-3">
                         <label for="price" class="form-label">Price *</label>
                         <div class="input-group">
-                            <span class="input-group-text">$</span>
+                            <span class="input-group-text">₹</span>
                             <input type="number" step="0.01"
                                 class="form-control @error('price') is-invalid @enderror" id="price" name="price"
                                 value="{{ old('price', $property->price ?? '') }}" required>
@@ -123,7 +122,7 @@
                         <select class="form-select @error('state_id') is-invalid @enderror" id="state_id"
                             name="state_id" required>
                             <option value="">Select State</option>
-                            @if($isEdit)
+                            @if ($isEdit)
                                 @foreach ($states as $state)
                                     <option value="{{ $state->id }}"
                                         {{ old('state_id', $property->state_id ?? '') == $state->id ? 'selected' : '' }}>
@@ -143,7 +142,7 @@
                         <select class="form-select @error('city_id') is-invalid @enderror" id="city_id"
                             name="city_id" required>
                             <option value="">Select City</option>
-                            @if($isEdit)
+                            @if ($isEdit)
                                 @foreach ($cities as $city)
                                     <option value="{{ $city->id }}"
                                         {{ old('city_id', $property->city_id ?? '') == $city->id ? 'selected' : '' }}>
@@ -285,11 +284,11 @@
                         <div class="form-check form-switch mb-2">
                             <input type="hidden" name="garage" value="0">
                             <input type="checkbox" class="form-check-input" id="garage" name="garage"
-                                value="1" {{ old('garage', $property->garage ?? false) ? 'checked' : '' }}>
+                                value="1" {{ old('garage', $property->garage ?? 0) ? 'checked' : '' }}>
                             <label class="form-check-label" for="garage">Has Garage</label>
                         </div>
                         <div id="garageSizeContainer"
-                            style="{{ old('garage', $property->garage ?? false) ? '' : 'display: none;' }}">
+                            style="{{ old('garage', $property->garage ?? 0) ? '' : 'display: none;' }}">
                             <label for="garage_size" class="form-label">Garage Size</label>
                             <input type="number" class="form-control @error('garage_size') is-invalid @enderror"
                                 id="garage_size" name="garage_size"
@@ -306,7 +305,7 @@
                         <div class="form-check form-switch">
                             <input type="hidden" name="status" value="0">
                             <input type="checkbox" class="form-check-input" id="status" name="status"
-                                value="1" {{ old('status', $property->status ?? true) ? 'checked' : '' }}>
+                                value="1" {{ old('status', $property->status ?? 0) ? 'checked' : '' }}>
                             <label class="form-check-label" for="status">Active</label>
                         </div>
                     </div>
@@ -451,16 +450,35 @@
         </a>
     </div>
 </form>
+@push('styles')
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<style>
+    select.loading {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%23999999' d='M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50'%3E%3CanimateTransform attributeName='transform' attributeType='XML' type='rotate' dur='1s' from='0 50 50' to='360 50 50' repeatCount='indefinite'/%3E%3C/path%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 10px center;
+        background-size: 20px 20px;
+        padding-right: 35px;
+    }
+</style>
+@endpush
 
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
     $(document).ready(function() {
+        // Setup CSRF token for AJAX requests
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
         // 1. Garage Toggle Functionality
         function toggleGarageSize() {
             $('#garageSizeContainer').toggle($('#garage').is(':checked'));
         }
-        toggleGarageSize(); // Initialize on load
+        toggleGarageSize();
         $('#garage').change(toggleGarageSize);
 
         // 2. Country Change -> Load States
@@ -485,6 +503,8 @@
                     country_id: countryId
                 },
                 success: function(response) {
+                    console.log('States response:', response);
+                    $stateSelect.empty().append('<option value="">Select State</option>');
                     if (response && response.length > 0) {
                         $.each(response, function(index, state) {
                             $stateSelect.append(
@@ -495,16 +515,20 @@
                         });
                     }
                 },
-                error: function(xhr) {
+                error: function(xhr, status, error) {
                     console.error("Error loading states:", xhr.responseText);
+                    console.error("Status:", status);
+                    console.error("Error:", error);
                     alert("Failed to load states. Please try again.");
                 },
                 complete: function() {
                     $stateSelect.prop('disabled', false).removeClass('loading');
-                    
-                    // If editing, set the selected state
-                    @if ($isEdit && isset($property->state_id))
-                        $stateSelect.val({{ $property->state_id }}).trigger('change');
+
+                    // Set the selected state if editing
+                    @if($isEdit && isset($property->state_id))
+                        setTimeout(function() {
+                            $stateSelect.val({{ $property->state_id }}).trigger('change');
+                        }, 100);
                     @endif
                 }
             });
@@ -530,6 +554,8 @@
                     state_id: stateId
                 },
                 success: function(response) {
+                    console.log('Cities response:', response);
+                    $citySelect.empty().append('<option value="">Select City</option>');
                     if (response && response.length > 0) {
                         $.each(response, function(index, city) {
                             $citySelect.append(
@@ -539,14 +565,18 @@
                             );
                         });
                     }
-                    
-                    // If editing, set the selected city
-                    @if ($isEdit && isset($property->city_id))
-                        $citySelect.val({{ $property->city_id }});
+
+                    // Set the selected city if editing
+                    @if($isEdit && isset($property->city_id))
+                        setTimeout(function() {
+                            $citySelect.val({{ $property->city_id }});
+                        }, 100);
                     @endif
                 },
-                error: function(xhr) {
+                error: function(xhr, status, error) {
                     console.error("Error loading cities:", xhr.responseText);
+                    console.error("Status:", status);
+                    console.error("Error:", error);
                     alert("Failed to load cities. Please try again.");
                 },
                 complete: function() {
@@ -562,20 +592,9 @@
         });
 
         // 5. Trigger country change if editing
-        @if ($isEdit && isset($property->country_id))
+        @if($isEdit && isset($property->country_id))
             $('#country_id').val({{ $property->country_id }}).trigger('change');
         @endif
     });
 </script>
-
-<style>
-    /* Loading spinner for selects */
-    select.loading {
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%23999999' d='M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50'%3E%3CanimateTransform attributeName='transform' attributeType='XML' type='rotate' dur='1s' from='0 50 50' to='360 50 50' repeatCount='indefinite'/%3E%3C/path%3E%3C/svg%3E");
-        background-repeat: no-repeat;
-        background-position: right 10px center;
-        background-size: 20px 20px;
-        padding-right: 35px;
-    }
-</style>
 @endpush

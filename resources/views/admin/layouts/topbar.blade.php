@@ -1,7 +1,7 @@
 <?php
 
 $settings = \App\Models\Setting::first();
-$logo = $settings->logo ? asset('storage/' . $settings->logo) : asset('build/images/logo-sm.png');
+$logo = isset($settings->logo) ? asset('storage/' . $settings->logo) : asset('build/images/logo-dark.png');
 ?>
 <header id="page-topbar">
     <div class="navbar-header">

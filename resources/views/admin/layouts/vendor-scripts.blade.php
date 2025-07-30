@@ -7,5 +7,7 @@
 <script src="{{ URL::asset('build/libs/apexcharts/apexcharts.min.js') }}"></script>
 
 @yield('scripts')
+@stack('scripts')
+
 
 

@@ -3,9 +3,9 @@ $settings = \App\Models\Setting::first();
 $site_title = $settings ? $settings->site_name : 'FindMyHomeZ | Real Estate';
 $site_description = $settings ? $settings->site_description : 'FindMyHomeZ | Real Estate';
 $site_keywords = $settings ? $settings->site_keywords : 'HTML5,CSS3,HTML,Template,Multi-Purpose,Mr_Bhuvi,Corporate FindMyHomeZ | Real Estate';
-$site_author = $settings ? $settings->site_author : 'Mr_Bhuvi';  
-$favicon = $settings->favicon ? asset('storage/' . $settings->favicon) : asset('build/images/favicon.ico');
-$logo = $settings->logo ? asset('storage/' . $settings->logo) : asset('build/images/logo-dark.png');
+$site_author = $settings ? $settings->site_author : 'Mr_Bhuvi';
+$favicon = isset($settings->favicon) ? asset('storage/' . $settings->favicon) : asset('build/images/favicon.ico');
+$logo = isset($settings->logo) ? asset('storage/' . $settings->logo) : asset('build/images/logo-dark.png');
 ?>
 <!DOCTYPE html>
 <html lang="en">

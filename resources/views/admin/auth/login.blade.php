@@ -5,7 +5,7 @@
 @section('content')
     <?php
     $settings = \App\Models\Setting::first();
-    $logo = $settings->logo ? asset('storage/' . $settings->logo) : asset('build/images/logo-dark.png');
+    $logo = isset($settings->logo) ? asset('storage/' . $settings->logo) : asset('build/images/logo-dark.png');
     ?>
     <div class="home-center">
         <div class="home-desc-center">

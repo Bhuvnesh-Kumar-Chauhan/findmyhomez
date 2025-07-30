@@ -2,7 +2,7 @@
 
 $settings = \App\Models\Setting::first();
 $site_title = $settings->site_name ?? 'FindMyHomeZ - Admin & Dashboard ';
-$favicon = $settings->favicon ? asset('storage/' . $settings->favicon) : asset('build/images/favicon.ico');
+$favicon = isset($settings->favicon) ? asset('storage/' . $settings->favicon) : asset('build/images/favicon.ico');
 
 ?>
 
@@ -15,9 +15,10 @@ $favicon = $settings->favicon ? asset('storage/' . $settings->favicon) : asset('
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesdesign" name="author" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ $favicon }}">
-    
+
     <!-- include head css -->
     @include('admin.layouts.head-css')
 </head>

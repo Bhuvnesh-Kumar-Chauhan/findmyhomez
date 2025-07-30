@@ -57,7 +57,7 @@
             <div class="form-check form-switch">
                 <input type="hidden" name="status" value="0">
                 <input type="checkbox" class="form-check-input" id="status" name="status" value="1"
-                    {{ old('status', $city->status ?? true) ? 'checked' : '' }}>
+                    {{ old('status', $city->status ?? 0) ? 'checked' : '' }}>
                 <label class="form-check-label" for="status">Active</label>
             </div>
         </div>

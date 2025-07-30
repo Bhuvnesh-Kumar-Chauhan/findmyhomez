@@ -24,10 +24,7 @@ class CityController extends Controller
 
     public function store(Request $request)
     {
-        // Convert checkbox to proper boolean
-        $request->merge([
-            'status' => $request->has('status') ? 1 : 0
-        ]);
+
 
         $validated = $request->validate([
             'country_id' => 'required|exists:countries,id',
@@ -53,9 +50,6 @@ class CityController extends Controller
     public function update(Request $request, City $city)
     {
         // Convert checkbox to proper boolean
-        $request->merge([
-            'status' => $request->has('status') ? 1 : 0
-        ]);
 
         $validated = $request->validate([
             'country_id' => 'required|exists:countries,id',

@@ -59,7 +59,6 @@ Route::name('admin.')->group(function () {
             Route::delete('/{city}', 'destroy')->name('destroy');
 
             Route::get('/states/{countryId}', 'getStates')->name('states');
-
         });
         Route::controller(PropertyTypeController::class)->prefix('property_types')->name('property_types.')->group(function () {
             Route::get('/', 'index')->name('index');
@@ -136,7 +135,7 @@ Route::name('admin.')->group(function () {
             Route::get('/{slider}/edit', 'edit')->name('edit');
             Route::put('/{slider}', 'update')->name('update');
             Route::delete('/{slider}', 'destroy')->name('destroy');
-             Route::post('{slider}/status', 'updateStatus')->name('status.update');
+            Route::post('{slider}/status', 'updateStatus')->name('status.update');
         });
         Route::controller(PropertyController::class)->prefix('properties')->name('properties.')->group(function () {
             Route::get('/', 'index')->name('index');
@@ -145,8 +144,9 @@ Route::name('admin.')->group(function () {
             Route::get('/{property}/edit', 'edit')->name('edit');
             Route::put('/{property}', 'update')->name('update');
             Route::delete('/{property}', 'destroy')->name('destroy');
-            Route::get('/properties/get-states', 'getStates')->name('get-states');
-            Route::get('/properties/get-cities', 'getCities')->name('get-cities');
+
+            Route::get('/get-states', 'getStates')->name('get-states');
+            Route::get('/get-cities', 'getCities')->name('get-cities');
         });
         Route::controller(SettingController::class)->prefix('settings')->name('settings.')->group(function () {
             Route::get('/', 'index')->name('index');
@@ -157,5 +157,4 @@ Route::name('admin.')->group(function () {
             Route::delete('/{setting}', 'destroy')->name('destroy');
         });
     });
-
 });

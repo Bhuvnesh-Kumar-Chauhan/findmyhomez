@@ -19,9 +19,9 @@ class PropertyController extends Controller
     public function index()
     {
         $properties = Property::with(['propertyType', 'propertyStatus', 'city', 'agent'])
-                            ->latest()
-                            ->paginate(10);
-        
+            ->latest()
+            ->paginate(10);
+
         return view('admin.properties.index', compact('properties'));
     }
 
@@ -31,7 +31,7 @@ class PropertyController extends Controller
         $statuses = PropertyStatus::all();
         $countries = Country::all();
         $agents = User::where('is_admin', 1)->get();
-        
+
         return view('admin.properties.create', compact('types', 'statuses', 'countries', 'agents'));
     }
 
@@ -68,7 +68,7 @@ class PropertyController extends Controller
         Property::create($validated);
 
         return redirect()->route('admin.properties.index')
-                        ->with('success', 'Property created successfully.');
+            ->with('success', 'Property created successfully.');
     }
 
     public function edit(Property $property)
@@ -79,7 +79,7 @@ class PropertyController extends Controller
         $states = State::where('country_id', $property->country_id)->get();
         $cities = City::where('state_id', $property->state_id)->get();
         $agents = User::where('is_admin', 1)->get();
-        
+
         return view('admin.properties.edit', compact('property', 'types', 'statuses', 'countries', 'states', 'cities', 'agents'));
     }
 
@@ -101,7 +101,7 @@ class PropertyController extends Controller
                     Storage::disk('public')->delete($image);
                 }
             }
-            
+
             $images = [];
             foreach ($request->file('images') as $image) {
                 $images[] = $image->store('properties', 'public');
@@ -117,7 +117,7 @@ class PropertyController extends Controller
                     Storage::disk('public')->delete($plan);
                 }
             }
-            
+
             $floorPlans = [];
             foreach ($request->file('floor_plans') as $plan) {
                 $floorPlans[] = $plan->store('properties/floor-plans', 'public');
@@ -128,7 +128,7 @@ class PropertyController extends Controller
         $property->update($validated);
 
         return redirect()->route('admin.properties.index')
-                        ->with('success', 'Property updated successfully.');
+            ->with('success', 'Property updated successfully.');
     }
 
     public function destroy(Property $property)
@@ -139,29 +139,30 @@ class PropertyController extends Controller
                 Storage::disk('public')->delete($image);
             }
         }
-        
+
         // Delete floor plans
         if ($property->floor_plans) {
             foreach ($property->floor_plans as $plan) {
                 Storage::disk('public')->delete($plan);
             }
         }
-        
+
         $property->delete();
 
         return redirect()->route('admin.properties.index')
-                        ->with('success', 'Property deleted successfully.');
+            ->with('success', 'Property deleted successfully.');
     }
 
-    public function getStates($countryId)
+    // In PropertyController.php
+    public function getStates(Request $request)
     {
-        $states = State::where('country_id', $countryId)->get();
+        $states = State::where('country_id', $request->country_id)->get();
         return response()->json($states);
     }
 
-    public function getCities($stateId)
+    public function getCities(Request $request)
     {
-        $cities = City::where('state_id', $stateId)->get();
+        $cities = City::where('state_id', $request->state_id)->get();
         return response()->json($cities);
     }
 
