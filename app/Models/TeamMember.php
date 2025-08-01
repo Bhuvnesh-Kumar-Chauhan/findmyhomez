@@ -14,11 +14,19 @@ class TeamMember extends Model
         'photo',
         'bio',
         'social_links',
-        'status'
+        'status',
+        'position',
+        'company',
+        'rating'
     ];
 
     protected $casts = [
-        'social_links' => 'array'
+        'social_links' => 'array',
+        'rating' => 'integer'
     ];
+    public function getRatingStarsAttribute()
+    {
+        return str_repeat('★', $this->rating) . str_repeat('☆', 5 - $this->rating);
+    }
 
 }

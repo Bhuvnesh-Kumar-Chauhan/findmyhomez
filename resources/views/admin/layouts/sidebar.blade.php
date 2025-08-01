@@ -70,14 +70,6 @@
                         <span>Team Member</span>
                     </a>
                 </li>
-
-                {{-- Testimonials --}}
-                <li>
-                    <a href="{{ route('admin.testimonials.index') }}" class="waves-effect">
-                        <i class="fas fa-quote-left"></i>
-                        <span>Testimonials</span>
-                    </a>
-                </li>
                 {{-- Subscriber --}}
                 <li>
                     <a href="{{ route('admin.subscribers.index') }}" class="waves-effect">

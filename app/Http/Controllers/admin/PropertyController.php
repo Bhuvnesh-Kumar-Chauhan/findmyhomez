@@ -37,12 +37,7 @@ class PropertyController extends Controller
 
     public function store(Request $request)
     {
-        $request->merge([
-            'featured' => $request->has('featured'),
-            'garage' => $request->has('garage'),
-            'status' => $request->has('status')
-        ]);
-
+        
         $validated = $this->validateProperty($request);
 
         // Handle images upload
@@ -85,12 +80,7 @@ class PropertyController extends Controller
 
     public function update(Request $request, Property $property)
     {
-        $request->merge([
-            'featured' => $request->has('featured'),
-            'garage' => $request->has('garage'),
-            'status' => $request->has('status')
-        ]);
-
+       
         $validated = $this->validateProperty($request, $property->id);
 
         // Handle images upload

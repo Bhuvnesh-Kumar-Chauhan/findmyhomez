@@ -58,7 +58,7 @@
                                             <td>{{ $property->title }}</td>
                                             <td>{{ $property->propertyType->name }}</td>
                                             <td>{{ $property->propertyStatus->name }}</td>
-                                            <td>{{ $property->formatted_price }}</td>
+                                            <td>₹{{ $property->price }}</td>
                                             <td>{{ $property->city->name }}, {{ $property->state->name }}</td>
                                             <td>
                                                 @if($property->featured)

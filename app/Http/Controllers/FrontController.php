@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Service;
 use Illuminate\Http\Request;
+use App\Models\Service;
 use App\Models\Slider;
+use App\Models\Setting;
+use App\Models\Property;
+use App\Models\TeamMember;
 
 class FrontController extends Controller
 {
@@ -12,8 +15,12 @@ class FrontController extends Controller
     {
         $home_sliders = Slider::all();
         $services = Service::where('status', 1)->get();
-        $settings = \App\Models\Setting::first();
-        return view('index',compact('home_sliders','settings','services'));
+        $settings = Setting::first();
+        $properties = Property::with(['propertyType','propertyStatus','country','state','city'])->where('status', 1)->take(6)->get();
+        $teamMembers = TeamMember::where('status', 'active')->get();
+        $socialLinks = json_decode($settings->social_links, true) ?? [];
+
+        return view('index',compact('home_sliders','settings','services','properties','teamMembers'));
     }
     public function second()
     {

@@ -278,7 +278,7 @@ $cities = $isEdit ? \App\Models\City::where('state_id', $property->state_id)->ge
                         <div class="form-check form-switch mb-2">
                             <input type="hidden" name="featured" value="0">
                             <input type="checkbox" class="form-check-input" id="featured" name="featured"
-                                value="1" {{ old('featured', $property->featured ?? false) ? 'checked' : '' }}>
+                                value="1" {{ old('featured', $property->featured ?? 0) ? 'checked' : '' }}>
                             <label class="form-check-label" for="featured">Featured Property</label>
                         </div>
                         <div class="form-check form-switch mb-2">

@@ -92,14 +92,7 @@ Route::name('admin.')->group(function () {
             Route::put('/{teamMember}', 'update')->name('update');
             Route::delete('/{teamMember}', 'destroy')->name('destroy');
         });
-        Route::controller(TestimonialController::class)->prefix('testimonials')->name('testimonials.')->group(function () {
-            Route::get('/', 'index')->name('index');
-            Route::get('/create', 'create')->name('create');
-            Route::post('/', 'store')->name('store');
-            Route::get('/{testimonial}/edit', 'edit')->name('edit');
-            Route::put('/{testimonial}', 'update')->name('update');
-            Route::delete('/{testimonial}', 'destroy')->name('destroy');
-        });
+
         Route::controller(BlogCategoryController::class)->prefix('blog-categories')->name('blog-categories.')->group(function () {
             Route::get('/', 'index')->name('index');
             Route::get('/create', 'create')->name('create');

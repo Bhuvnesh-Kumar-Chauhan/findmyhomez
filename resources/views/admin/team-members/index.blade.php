@@ -42,6 +42,9 @@
                                             <th>Name</th>
                                             <th>Email</th>
                                             <th>Phone</th>
+                                            <th>Position</th>
+                                            <th>Company</th>
+                                            <th>Rating</th>
                                             <th>Status</th>
                                             <th>Actions</th>
                                         </tr>
@@ -63,6 +66,15 @@
                                             <td>{{ $member->name }}</td>
                                             <td>{{ $member->email ?? 'N/A' }}</td>
                                             <td>{{ $member->phone ?? 'N/A' }}</td>
+                                            <td>{{ $member->position ?? 'N/A' }}</td>
+                                            <td>{{ $member->company ?? 'N/A' }}</td>
+                                            <td>
+                                                @if($member->rating)
+                                                    <span class="badge badge-soft-primary">{{ $member->rating }}</span>
+                                                @else
+                                                    <span class="badge badge-soft-secondary">N/A</span>
+                                                @endif
+                                            </td>
                                             <td>
                                                 @if($member->status === 'active')
                                                     <span class="badge badge-soft-success">Active</span>

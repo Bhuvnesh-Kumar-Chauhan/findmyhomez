@@ -240,173 +240,59 @@
             <!--======= PROPERTIES ROW =========-->
             <ul class="row">
 
-                <!--======= PROPERTY =========-->
-                <li class="col-sm-4">
-                    <!--======= TAGS =========-->
-                    <span class="tag font-montserrat rent">FOR RENT</span>
-                    <section>
-                        <!--======= IMAGE =========-->
-                        <div class="img"> <img class="img-responsive" src="images/img-1.jpg" alt="">
-                            <!--======= IMAGE HOVER =========-->
+                @foreach ($properties as $property)
+                    <li class="col-sm-4">
+                        <!--======= TAGS =========-->
+                        @if (isset($property->propertyStatus))
+                            <span
+                                class="tag font-montserrat 
+                                    @if (strtolower($property->propertyStatus->name) === 'for sale') sale
+                                    @elseif(strtolower($property->propertyStatus->name) === 'for rent') rent
+                                    @else
+                                        style-bg-blue @endif">
+                                {{ $property->propertyStatus->name }}
+                            </span>
+                        @endif
 
-                            <div class="over-proper"> <a href="#." class="btn font-montserrat">more details</a>
+                        <section>
+                            <!--======= IMAGE =========-->
+                            <div class="img">
+                                <img class="img-responsive"
+                                    style="width: 100%; height: 250px; object-fit: cover; border-radius: 2px;"
+                                    src="{{ $property->main_image ? $property->main_image : 'images/img-1.jpg' }}"
+                                    alt="{{ $property->title }}">
+                                <!--======= IMAGE HOVER =========-->
+                                <div class="over-proper">
+                                    <a href="{{ route('property.detail', $property->id) }}"
+                                        class="btn font-montserrat">more details</a>
+                                </div>
                             </div>
-                        </div>
-                        <!--======= HOME INNER DETAILS =========-->
-                        <ul class="home-in">
-                            <li><span><i class="fa fa-home"></i> 20,000 Acres</span></li>
-                            <li><span><i class="fa fa-bed"></i> 3 Bedrooms</span></li>
-                            <li><span><i class="fa fa-tty"></i> 3 Bathrooms</span></li>
-                        </ul>
-                        <!--======= HOME DETAILS =========-->
-                        <div class="detail-sec"> <a href="#." class="font-montserrat">sweet home for small
-                                family</a> <span class="locate"><i class="fa fa-map-marker"></i> Boston,USA</span>
-                            <p>Till the one day when the lady met this fellow and they knew it was much more than </p>
-                            <div class="share-p"> <span class="price font-montserrat">$ 256,596</span> <i
-                                    class="fa fa-star-o"></i> <i class="fa fa-share-alt"></i> </div>
-                        </div>
-                    </section>
-                </li>
 
-                <!--======= PROPERTY =========-->
-                <li class="col-sm-4">
-                    <!--======= TAGS =========-->
-                    <span class="tag font-montserrat rent">FOR RENT</span>
-                    <section>
-                        <!--======= IMAGE =========-->
-                        <div class="img"> <img class="img-responsive" src="images/img-2.jpg" alt="">
-                            <!--======= IMAGE HOVER =========-->
+                            <!--======= HOME INNER DETAILS =========-->
+                            <ul class="home-in">
+                                <li><span><i class="fa fa-home"></i> {{ $property->area ?? '20,000' }} Acres</span></li>
+                                <li><span><i class="fa fa-bed"></i> {{ $property->bedrooms ?? '3' }} Bedrooms</span></li>
+                                <li><span><i class="fa fa-tty"></i> {{ $property->bathrooms ?? '3' }} Bathrooms</span>
+                                </li>
+                            </ul>
 
-                            <div class="over-proper"> <a href="#." class="btn font-montserrat">more details</a>
+                            <!--======= HOME DETAILS =========-->
+                            <div class="detail-sec">
+                                <a href="{{ route('property.detail', $property->id) }}"
+                                    class="font-montserrat">{{ $property->title ?? 'Sweet home for small family' }}</a>
+                                <span class="locate"><i class="fa fa-map-marker"></i>
+                                    {{ $property->city->name }}, {{ $property->state->name }}</span>
+                                <p>{{ $property->description ?? 'Beautiful property with great amenities' }}</p>
+                                <div class="share-p">
+                                    <span class="price font-montserrat">₹
+                                        {{ number_format($property->price ?? 256596) }}</span>
+                                    {{-- <i class="fa fa-star-o"></i>
+                                    <i class="fa fa-share-alt"></i> --}}
+                                </div>
                             </div>
-                        </div>
-                        <!--======= HOME INNER DETAILS =========-->
-                        <ul class="home-in">
-                            <li><span><i class="fa fa-home"></i> 20,000 Acres</span></li>
-                            <li><span><i class="fa fa-bed"></i> 3 Bedrooms</span></li>
-                            <li><span><i class="fa fa-tty"></i> 3 Bathrooms</span></li>
-                        </ul>
-                        <!--======= HOME DETAILS =========-->
-                        <div class="detail-sec"> <a href="#." class="font-montserrat">sweet home for small
-                                family</a> <span class="locate"><i class="fa fa-map-marker"></i> Boston,USA</span>
-                            <p>Till the one day when the lady met this fellow and they knew it was much more than </p>
-                            <div class="share-p"> <span class="price font-montserrat">$ 256,596</span> <i
-                                    class="fa fa-star-o"></i> <i class="fa fa-share-alt"></i> </div>
-                        </div>
-                    </section>
-                </li>
-
-                <!--======= PROPERTY =========-->
-                <li class="col-sm-4">
-                    <!--======= TAGS =========-->
-                    <span class="tag font-montserrat sale">FOR SALE</span>
-                    <section>
-                        <!--======= IMAGE =========-->
-                        <div class="img"> <img class="img-responsive" src="images/img-3.jpg" alt="">
-                            <!--======= IMAGE HOVER =========-->
-
-                            <div class="over-proper"> <a href="#." class="btn font-montserrat">more details</a>
-                            </div>
-                        </div>
-                        <!--======= HOME INNER DETAILS =========-->
-                        <ul class="home-in">
-                            <li><span><i class="fa fa-home"></i> 20,000 Acres</span></li>
-                            <li><span><i class="fa fa-bed"></i> 3 Bedrooms</span></li>
-                            <li><span><i class="fa fa-tty"></i> 3 Bathrooms</span></li>
-                        </ul>
-                        <!--======= HOME DETAILS =========-->
-                        <div class="detail-sec"> <a href="#." class="font-montserrat">sweet home for small
-                                family</a> <span class="locate"><i class="fa fa-map-marker"></i> Boston,USA</span>
-                            <p>Till the one day when the lady met this fellow and they knew it was much more than </p>
-                            <div class="share-p"> <span class="price font-montserrat">$ 256,596</span> <i
-                                    class="fa fa-star-o"></i> <i class="fa fa-share-alt"></i> </div>
-                        </div>
-                    </section>
-                </li>
-
-                <!--======= PROPERTY =========-->
-                <li class="col-sm-4">
-                    <!--======= TAGS =========-->
-                    <span class="tag font-montserrat rent">FOR RENT</span>
-                    <section>
-                        <!--======= IMAGE =========-->
-                        <div class="img"> <img class="img-responsive" src="images/img-4.jpg" alt="">
-                            <!--======= IMAGE HOVER =========-->
-
-                            <div class="over-proper"> <a href="#." class="btn font-montserrat">more details</a>
-                            </div>
-                        </div>
-                        <!--======= HOME INNER DETAILS =========-->
-                        <ul class="home-in">
-                            <li><span><i class="fa fa-home"></i> 20,000 Acres</span></li>
-                            <li><span><i class="fa fa-bed"></i> 3 Bedrooms</span></li>
-                            <li><span><i class="fa fa-tty"></i> 3 Bathrooms</span></li>
-                        </ul>
-                        <!--======= HOME DETAILS =========-->
-                        <div class="detail-sec"> <a href="#." class="font-montserrat">sweet home for small
-                                family</a> <span class="locate"><i class="fa fa-map-marker"></i> Boston,USA</span>
-                            <p>Till the one day when the lady met this fellow and they knew it was much more than </p>
-                            <div class="share-p"> <span class="price font-montserrat">$ 2,956,596</span> <i
-                                    class="fa fa-star-o"></i> <i class="fa fa-share-alt"></i> </div>
-                        </div>
-                    </section>
-                </li>
-
-                <!--======= PROPERTY =========-->
-                <li class="col-sm-4">
-                    <!--======= TAGS =========-->
-                    <span class="tag font-montserrat sale">FOR SALE</span>
-                    <section>
-                        <!--======= IMAGE =========-->
-                        <div class="img"> <img class="img-responsive" src="images/img-5.jpg" alt="">
-                            <!--======= IMAGE HOVER =========-->
-
-                            <div class="over-proper"> <a href="#." class="btn font-montserrat">more details</a>
-                            </div>
-                        </div>
-                        <!--======= HOME INNER DETAILS =========-->
-                        <ul class="home-in">
-                            <li><span><i class="fa fa-home"></i> 20,000 Acres</span></li>
-                            <li><span><i class="fa fa-bed"></i> 3 Bedrooms</span></li>
-                            <li><span><i class="fa fa-tty"></i> 3 Bathrooms</span></li>
-                        </ul>
-                        <!--======= HOME DETAILS =========-->
-                        <div class="detail-sec"> <a href="#." class="font-montserrat">sweet home for small
-                                family</a> <span class="locate"><i class="fa fa-map-marker"></i> Boston,USA</span>
-                            <p>Till the one day when the lady met this fellow and they knew it was much more than </p>
-                            <div class="share-p"> <span class="price font-montserrat">$ 256,596</span> <i
-                                    class="fa fa-star-o"></i> <i class="fa fa-share-alt"></i> </div>
-                        </div>
-                    </section>
-                </li>
-
-                <!--======= PROPERTY =========-->
-                <li class="col-sm-4">
-                    <!--======= TAGS =========-->
-                    <span class="tag font-montserrat rent">FOR RENT</span>
-                    <section>
-                        <!--======= IMAGE =========-->
-                        <div class="img"> <img class="img-responsive" src="images/img-6.jpg" alt="">
-                            <!--======= IMAGE HOVER =========-->
-
-                            <div class="over-proper"> <a href="#." class="btn font-montserrat">more details</a>
-                            </div>
-                        </div>
-                        <!--======= HOME INNER DETAILS =========-->
-                        <ul class="home-in">
-                            <li><span><i class="fa fa-home"></i> 20,000 Acres</span></li>
-                            <li><span><i class="fa fa-bed"></i> 3 Bedrooms</span></li>
-                            <li><span><i class="fa fa-tty"></i> 3 Bathrooms</span></li>
-                        </ul>
-                        <!--======= HOME DETAILS =========-->
-                        <div class="detail-sec"> <a href="#." class="font-montserrat">sweet home for small
-                                family</a> <span class="locate"><i class="fa fa-map-marker"></i> Boston,USA</span>
-                            <p>Till the one day when the lady met this fellow and they knew it was much more than </p>
-                            <div class="share-p"> <span class="price font-montserrat">$ 2,956,596</span> <i
-                                    class="fa fa-star-o"></i> <i class="fa fa-share-alt"></i> </div>
-                        </div>
-                    </section>
-                </li>
+                        </section>
+                    </li>
+                @endforeach
             </ul>
         </div>
     </section>
@@ -421,106 +307,44 @@
                     get ‘em but the law never will. The weather started getting rough - the tiny ship was tossed.</p>
             </div>
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
 
                     <!--======= TEAM ROW =========-->
                     <ul class="row">
 
                         <!--======= TEAM =========-->
-                        <li class="col-sm-6">
-                            <div class="team"> <img class="img-responsive" src="images/agent-1.jpg" alt="">
-                                <div class="team-over">
-                                    <!--======= SOCIAL ICON =========-->
-                                    <ul class="social_icons animated-6s fadeInUp">
-                                        <li class="facebook"><a href="#."><i class="fa fa-facebook"></i></a></li>
-                                        <li class="twitter"><a href="#."><i class="fa fa-twitter"></i></a></li>
-                                        <li class="googleplus"><a href="#."><i class="fa fa-google-plus"></i></a>
-                                        </li>
-                                        <li class="linkedin"><a href="#."><i class="fa fa-linkedin"></i></a></li>
-                                    </ul>
-                                </div>
+                        @foreach ($teamMembers as $teamMember)
+                            <li class="col-sm-3">
+                                <div class="team"> <img class="img-responsive"
+                                        src="{{ asset('storage/' . $teamMember->photo) ?? 'images/agent-1.jpg' }}"
+                                        alt=""
+                                        style="width: 100%; height: 250px; object-fit: cover; border-radius: 2px;">
+                                    <div class="team-over">
+                                        <!--======= SOCIAL ICON =========-->
+                                        <ul class="social_icons animated-6s fadeInUp">
+                                            <li class="facebook"><a href="{{ old('social_links.facebook', $socialLinks['facebook'] ?? '') }}"><i class="fa fa-facebook"></i></a>
+                                            </li>
+                                            <li class="twitter"><a href="{{ old('social_links.twitter', $socialLinks['twitter'] ?? '') }}"><i class="fa fa-twitter"></i></a></li>
+                                            <li class="instagram"><a href="{{ old('social_links.instagram', $socialLinks['instagram'] ?? '') }}"><i
+                                                        class="fa fa-instagram"></i></a>
+                                            </li>
+                                            <li class="linkedin"><a href="{{ old('social_links.linkedin', $socialLinks['linkedin'] ?? '') }}"><i class="fa fa-linkedin"></i></a>
+                                            </li>
+                                        </ul>
+                                    </div>
 
-                                <!--======= TEAM DETAILS =========-->
-                                <div class="team-detail">
-                                    <h6>David Martin</h6>
-                                    <p>Founder</p>
+                                    <!--======= TEAM DETAILS =========-->
+                                    <div class="team-detail">
+                                        <h6>{{ $teamMember->name ?? 'NA' }}</h6>
+                                        <p>{{ $teamMember->position }}</p>
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
+                            </li>
+                        @endforeach
 
-                        <!--======= TEAM =========-->
-                        <li class="col-sm-6">
-                            <div class="team"> <img class="img-responsive" src="images/agent-2.jpg" alt="">
-                                <div class="team-over">
-                                    <!--======= SOCIAL ICON =========-->
-                                    <ul class="social_icons animated-6s fadeInUp">
-                                        <li class="facebook"><a href="#."><i class="fa fa-facebook"></i></a></li>
-                                        <li class="twitter"><a href="#."><i class="fa fa-twitter"></i></a></li>
-                                        <li class="googleplus"><a href="#."><i class="fa fa-google-plus"></i></a>
-                                        </li>
-                                        <li class="linkedin"><a href="#."><i class="fa fa-linkedin"></i></a></li>
-                                    </ul>
-                                </div>
-
-                                <!--======= TEAM DETAILS =========-->
-                                <div class="team-detail">
-                                    <h6>Hendrick jack </h6>
-                                    <p>co-Founder</p>
-                                </div>
-                            </div>
-                        </li>
                     </ul>
                 </div>
-                <div class="col-md-6">
 
-                    <!--======= TEAM ROW =========-->
-                    <ul class="row">
-
-                        <!--======= TEAM =========-->
-                        <li class="col-sm-6">
-                            <div class="team"> <img class="img-responsive" src="images/agent-3.jpg" alt="">
-                                <div class="team-over">
-                                    <!--======= SOCIAL ICON =========-->
-                                    <ul class="social_icons animated-6s fadeInUp">
-                                        <li class="facebook"><a href="#."><i class="fa fa-facebook"></i></a></li>
-                                        <li class="twitter"><a href="#."><i class="fa fa-twitter"></i></a></li>
-                                        <li class="googleplus"><a href="#."><i class="fa fa-google-plus"></i></a>
-                                        </li>
-                                        <li class="linkedin"><a href="#."><i class="fa fa-linkedin"></i></a></li>
-                                    </ul>
-                                </div>
-
-                                <!--======= TEAM DETAILS =========-->
-                                <div class="team-detail">
-                                    <h6>charles edward </h6>
-                                    <p>team leader </p>
-                                </div>
-                            </div>
-                        </li>
-
-                        <!--======= TEAM =========-->
-                        <li class="col-sm-6">
-                            <div class="team"> <img class="img-responsive" src="images/agent-4.jpg" alt="">
-                                <div class="team-over">
-                                    <!--======= SOCIAL ICON =========-->
-                                    <ul class="social_icons animated-6s fadeInUp">
-                                        <li class="facebook"><a href="#."><i class="fa fa-facebook"></i></a></li>
-                                        <li class="twitter"><a href="#."><i class="fa fa-twitter"></i></a></li>
-                                        <li class="googleplus"><a href="#."><i class="fa fa-google-plus"></i></a>
-                                        </li>
-                                        <li class="linkedin"><a href="#."><i class="fa fa-linkedin"></i></a></li>
-                                    </ul>
-                                </div>
-
-                                <!--======= TEAM DETAILS =========-->
-                                <div class="team-detail">
-                                    <h6>jessica wevins </h6>
-                                    <p>team leader</p>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
             </div>
         </div>
     </section>

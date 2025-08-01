@@ -100,7 +100,7 @@ class Property extends Model
 
     public function getMainImageAttribute()
     {
-        return $this->images ? asset('storage/' . $this->images[0]) : asset('images/default-property.jpg');
+        return $this->images ? asset('storage/' . $this->images[0]) : asset('build/images/comming-soon.jpg');
     }
 
     // Scopes
